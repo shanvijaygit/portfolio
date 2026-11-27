@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <meta name="description" content="A portfolio of selected work, ideas, and experiments by Your Name.">
+  <title>Your Name — Portfolio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f5f0;
+      --ink: #1c1b19;
+      --muted: #77746d;
+      --line: #dedcd4;
+      --accent: #f26a45;
+      --lime: #d3ef75;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .shell { width: min(1120px, calc(100% - 64px)); margin-inline: auto; }
+    .topbar { position: sticky; top: 0; z-index: 5; background: rgb(246 245 240 / 88%); backdrop-filter: blur(14px); border-bottom: 1px solid rgb(222 220 212 / 75%); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: inline-flex; gap: 9px; align-items: center; font-size: 14px; font-weight: 750; letter-spacing: -.04em; }
+    .brand-mark { width: 25px; height: 25px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: var(--lime); font-size: 12px; }
+    .nav-links { display: flex; align-items: center; gap: 34px; font-size: 12px; color: #56534e; }
+    .nav-links a:hover, .text-link:hover { color: var(--accent); }
+    .nav-cta { padding: 11px 16px; border: 1px solid var(--ink); border-radius: 99px; color: var(--ink); transition: .2s ease; }
+    .nav-cta:hover { color: var(--paper); background: var(--ink); }
+    .menu-toggle { display: none; border: 0; background: transparent; padding: 8px; color: var(--ink); cursor: pointer; }
+    .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; padding: 100px 0 106px; min-height: 610px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #66635d; font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .pulse { width: 7px; height: 7px; border-radius: 50%; background: #81a938; box-shadow: 0 0 0 4px rgb(129 169 56 / 13%); }
+    h1 { max-width: 650px; margin: 26px 0 24px; font-size: clamp(54px, 7.5vw, 92px); font-weight: 560; letter-spacing: -.085em; line-height: .96; }
+    h1 em { font-family: var(--serif); font-weight: 400; }
+    .hero-copy { max-width: 490px; color: var(--muted); font-size: 16px; line-height: 1.8; }
+    .hero-actions { display: flex; align-items: center; gap: 24px; margin-top: 32px; }
+    .button { display: inline-flex; align-items: center; gap: 12px; padding: 15px 19px; border: 1px solid var(--ink); border-radius: 99px; background: var(--ink); color: white; font-size: 12px; font-weight: 650; transition: transform .2s ease, background .2s ease; }
+    .button:hover { transform: translateY(-2px); background: #393732; }
+    .text-link { font-size: 12px; font-weight: 650; transition: color .2s ease; }
+    .arrow { font-size: 17px; line-height: 0; }
+    .hero-art { min-height: 390px; position: relative; display: grid; place-items: center; }
+    .orbit { position: absolute; width: min(100%, 400px); aspect-ratio: 1; border: 1px solid #d6d3ca; border-radius: 50%; transform: rotate(-24deg) scaleY(.77); }
+    .orbit::before, .orbit::after { content: ""; position: absolute; inset: 18px -18px; border: 1px solid #e3e0d7; border-radius: 50%; }
+    .orbit::after { inset: -18px 18px; }
+    .art-core { position: relative; display: grid; place-items: center; width: 235px; aspect-ratio: 1; overflow: hidden; border-radius: 50%; background: var(--lime); }
+    .art-core::before { content: ""; position: absolute; width: 170px; height: 170px; top: 49px; left: 34px; border-radius: 54% 46% 41% 59% / 43% 41% 59% 57%; background: var(--accent); transform: rotate(-26deg); }
+    .art-core::after { content: ""; position: absolute; width: 115px; height: 115px; top: 71px; left: 87px; border-radius: 50%; background: #f8d7b6; mix-blend-mode: multiply; }
+    .art-label { position: absolute; z-index: 1; right: 4px; bottom: 36px; padding: 13px 15px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); box-shadow: 0 8px 26px rgb(28 27 25 / 7%); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .art-stamp { position: absolute; z-index: 1; left: 2px; top: 59px; width: 58px; height: 58px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: white; font-family: var(--serif); font-size: 22px; transform: rotate(-12deg); }
+    .section { padding: 88px 0; border-top: 1px solid var(--line); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 38px; }
+    .section-kicker { margin: 0 0 13px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    h2 { margin: 0; font-size: clamp(34px, 4.7vw, 56px); font-weight: 550; letter-spacing: -.07em; line-height: 1.04; }
+    .section-note { max-width: 270px; margin: 0 0 3px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .project-card { min-width: 0; }
+    .project-visual { position: relative; height: 300px; display: grid; place-items: center; overflow: hidden; border-radius: 7px; }
+    .visual-one { background: #e7dfd1; }
+    .visual-two { background: #dce5df; }
+    .mock-window { width: 71%; height: 72%; padding: 13px; border: 1px solid rgb(28 27 25 / 12%); border-radius: 8px; background: #fbfaf6; box-shadow: 0 20px 50px rgb(28 27 25 / 13%); transform: rotate(-4deg); }
+    .window-bar { display: flex; gap: 4px; margin-bottom: 12px; }
+    .window-bar i { width: 5px; height: 5px; border-radius: 50%; background: #d6d2c8; }
+    .mock-title { width: 70%; height: 11px; margin: 20px 0 10px; border-radius: 5px; background: #25241f; }
+    .mock-line { width: 43%; height: 4px; margin-top: 6px; border-radius: 5px; background: #d0cdc3; }
+    .mock-blocks { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 6px; margin-top: 20px; }
+    .mock-blocks span { height: 85px; border-radius: 4px; background: #d2e27b; }
+    .mock-blocks span:nth-child(2) { background: #f28a63; }
+    .mock-blocks span:nth-child(3) { background: #c9c4b8; }
+    .mock-phone { width: 150px; height: 234px; padding: 8px; border: 1px solid rgb(28 27 25 / 13%); border-radius: 20px; background: #faf9f4; box-shadow: 0 22px 50px rgb(28 27 25 / 13%); transform: rotate(5deg); }
+    .phone-screen { height: 100%; padding: 15px 10px; border-radius: 14px; background: #b7c8b7; }
+    .phone-dot { width: 25px; height: 25px; border-radius: 50%; background: #f1eee5; }
+    .phone-heading { width: 87%; height: 22px; margin: 24px 0 7px; border-radius: 4px; background: #263d36; }
+    .phone-line { width: 72%; height: 4px; margin-top: 6px; border-radius: 4px; background: rgb(38 61 54 / 45%); }
+    .phone-tile { height: 79px; margin-top: 17px; border-radius: 7px; background: #f3a286; }
+    .project-meta { display: flex; justify-content: space-between; gap: 18px; align-items: start; padding: 17px 1px 0; }
+    .project-meta h3 { margin: 0 0 6px; font-size: 17px; font-weight: 650; letter-spacing: -.04em; }
+    .project-meta p { margin: 0; color: var(--muted); font-size: 12px; }
+    .project-type { flex: 0 0 auto; padding: 7px 10px; border: 1px solid var(--line); border-radius: 99px; color: #6b6861; font-size: 10px; }
+    .about-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 80px; align-items: start; }
+    .about-copy { max-width: 570px; color: var(--muted); font-size: 15px; line-height: 1.9; }
+    .about-copy p { margin: 0 0 19px; }
+    .skills { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 26px; }
+    .skills span { padding: 9px 12px; border-radius: 99px; background: #ebe9e1; color: #55524c; font-size: 11px; }
+    .contact { position: relative; overflow: hidden; padding: 62px; border-radius: 8px; background: var(--ink); color: white; }
+    .contact::after { content: ""; position: absolute; width: 260px; height: 260px; right: -52px; top: -95px; border: 1px solid rgb(211 239 117 / 28%); border-radius: 50%; box-shadow: 0 0 0 25px rgb(211 239 117 / 5%), 0 0 0 50px rgb(211 239 117 / 4%); }
+    .contact h2 { max-width: 590px; position: relative; z-index: 1; }
+    .contact p { max-width: 430px; margin: 18px 0 25px; color: #aaa8a1; font-size: 13px; line-height: 1.7; }
+    .contact .button { position: relative; z-index: 1; border-color: var(--lime); background: var(--lime); color: var(--ink); }
+    .contact .button:hover { background: #e0f598; }
+    footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 27px 0; color: var(--muted); font-size: 11px; }
+    .socials { display: flex; gap: 20px; }
+    .socials a:hover { color: var(--accent); }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 40px, 560px); }
+      .nav { min-height: 66px; }
+      .menu-toggle { display: inline-flex; }
+      .nav-links { position: absolute; display: none; top: 65px; left: 0; right: 0; padding: 20px; flex-direction: column; align-items: stretch; gap: 20px; border-bottom: 1px solid var(--line); background: var(--paper); }
+      .nav-links.is-open { display: flex; }
+      .nav-cta { align-self: flex-start; }
+      .hero { grid-template-columns: 1fr; gap: 10px; padding: 76px 0 74px; }
+      .hero-art { min-height: 330px; }
+      .art-core { width: 195px; }
+      .art-core::before { width: 140px; height: 140px; top: 41px; left: 28px; }
+      .art-core::after { width: 94px; height: 94px; top: 59px; left: 72px; }
+      .orbit { width: 310px; }
+      .art-label { right: 0; bottom: 25px; }
+      .art-stamp { left: 0; top: 30px; }
+      .section { padding: 65px 0; }
+      .section-head { align-items: start; flex-direction: column; gap: 16px; }
+      .section-note { max-width: 390px; }
+      .project-grid { grid-template-columns: 1fr; gap: 30px; }
+      .project-visual { height: 270px; }
+      .about-grid { grid-template-columns: 1fr; gap: 22px; }
+      .contact { padding: 42px 28px; }
+      footer { align-items: start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav shell" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Your Name home"><span class="brand-mark">Y</span> YOUR NAME</a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+      <div class="nav-links" id="nav-links">
+        <a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
+        <a class="nav-cta" href="mailto:hello@example.com">Let’s talk <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero shell" id="home">
+      <div>
+        <div class="eyebrow"><span class="pulse" aria-hidden="true"></span> Available for select opportunities</div>
+        <h1>Making ideas<br>feel <em>real.</em></h1>
+        <p class="hero-copy">Hi, I’m <strong>Your Name</strong> — a [your role] who turns thoughtful ideas into useful, memorable digital experiences.</p>
+        <div class="hero-actions"><a class="button" href="#work">Explore my work <span class="arrow" aria-hidden="true">↘</span></a><a class="text-link" href="#about">A little about me <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="hero-art" aria-label="Abstract illustration in coral and lime" role="img"><div class="orbit"></div><div class="art-core"></div><div class="art-stamp">Y.</div><div class="art-label">Curiosity, made visible</div></div>
+    </section>
+    <section class="section" id="work">
+      <div class="shell">
+        <div class="section-head"><div><p class="section-kicker">A few good things</p><h2>Selected work</h2></div><p class="section-note">A small collection of projects that show how I think, make, and solve problems.</p></div>
+        <div class="project-grid">
+          <article class="project-card"><div class="project-visual visual-one" role="img" aria-label="Abstract website layout preview"><div class="mock-window"><div class="window-bar"><i></i><i></i><i></i></div><div class="mock-title"></div><div class="mock-line"></div><div class="mock-line" style="width:58%"></div><div class="mock-blocks"><span></span><span></span><span></span></div></div></div><div class="project-meta"><div><h3>Project name one</h3><p>One-line description of the challenge and outcome.</p></div><span class="project-type">[Category]</span></div></article>
+          <article class="project-card"><div class="project-visual visual-two" role="img" aria-label="Abstract mobile app preview"><div class="mock-phone"><div class="phone-screen"><div class="phone-dot"></div><div class="phone-heading"></div><div class="phone-line"></div><div class="phone-line" style="width:58%"></div><div class="phone-tile"></div></div></div></div><div class="project-meta"><div><h3>Project name two</h3><p>One-line description of the challenge and outcome.</p></div><span class="project-type">[Category]</span></div></article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="about">
+      <div class="shell about-grid">
+        <div><p class="section-kicker">The person behind the pixels</p><h2>A bit<br>about me.</h2></div>
+        <div class="about-copy"><p>I’m a [your role] based in [your city], with a soft spot for clear thinking, good details, and work that makes someone’s day a little easier.</p><p>My approach is collaborative and curious: understand the real problem, make the complicated feel simple, and keep refining until it feels right. Away from the screen, you’ll usually find me [a hobby or personal detail].</p><div class="skills" aria-label="Skills"><span>[Skill or tool]</span><span>[Skill or tool]</span><span>[Skill or tool]</span><span>[Area of expertise]</span></div></div>
+      </div>
+    </section>
+    <section class="section" id="contact"><div class="shell"><div class="contact"><p class="section-kicker" style="color:#aaa8a1">Have something in mind?</p><h2>Let’s make<br>something matter.</h2><p>Have a project, a role, or just a good question? I’d love to hear what you’re thinking.</p><a class="button" href="mailto:hello@example.com">Get in touch <span class="arrow" aria-hidden="true">↗</span></a></div></div></section>
+  </main>
+  <footer class="shell"><span>© <span id="year"></span> Your Name. Made with intention.</span><div class="socials"><a href="https://github.com/shanvijaygit">GitHub ↗</a><a href="https://www.linkedin.com/" aria-label="LinkedIn (replace with your profile)">LinkedIn ↗</a></div></footer>
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+      navLinks.classList.toggle('is-open', !isOpen);
+    });
+    navLinks.addEventListener('click', (event) => {
+      if (event.target.closest('a')) {
+        navLinks.classList.remove('is-open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open menu');
+      }
+    });
+    document.querySelector('#year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
